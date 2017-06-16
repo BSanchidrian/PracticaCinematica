@@ -143,11 +143,13 @@
     <ClCompile Include="Dibujar.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Misil.cpp" />
+    <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cohete.h" />
     <ClInclude Include="Objeto.h" />
     <ClInclude Include="Misil.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

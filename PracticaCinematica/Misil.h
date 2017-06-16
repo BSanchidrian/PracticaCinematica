@@ -9,7 +9,7 @@ private:
 	int mAnguloLanzamiento;
 	clock_t mTiempoVuelo;
 public:
-	Misil(int velocidad, int angulo);
+	Misil(const int &velocidad, const int &angulo);
 
 	void tick() override;
 

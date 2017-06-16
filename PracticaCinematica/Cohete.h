@@ -10,7 +10,7 @@ private:
 	int mPosicion;
 	clock_t mTiempoVuelo;
 public:
-	Cohete(int altura, int velocidad);
+	Cohete(const int &altura, const int &velocidad);
 
 	void tick() override;
 
