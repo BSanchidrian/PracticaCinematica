@@ -2,7 +2,6 @@
 #include <Windows.h>
 #include <string>
 #include "Cohete.h"
-#include <cstdlib>
 #include "Misil.h"
 
 using std::cout;
@@ -34,7 +33,7 @@ int main()
 	cin >> anguloLanzamieto;
 
 	Cohete *cohete = new Cohete(alturaCohete, velocidadCohete);
-	//Misil *misil = new Misil(velocidadInicialMisil, anguloLanzamieto);
+	Misil *misil = new Misil(velocidadInicialMisil, anguloLanzamieto);
 
 	clock_t tiempoInicio = clock();
 	while(!GetAsyncKeyState(VK_F1))
@@ -46,7 +45,7 @@ int main()
 		cohete->tick();
 		//misil->tick();
 
-		printf("COHETE\nPosicion = %.2fm\nTiempo = %ds (%dms)\n", cohete->getPosicion()->getX(), cohete->getTiempo() / 1000, cohete->getTiempo());
+		printf("COHETE\nPosicion = %.2fm\nTiempo = %dms (%ds)\n", cohete->getPosicion()->getX(), cohete->getTiempo(), cohete->getTiempo() / 1000);
 
 		//printf("MISIL\nPosicion = %d m\nTiempo = %d s\n", cohete->getPosicion()->getX(), cohete->getTiempoVuelo());
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "Vector2.h"
+#include <ctime>
 
 /*
  * Clase Abstracta que define un objeto en el espacio
@@ -8,15 +9,23 @@
  */
 class Objeto
 {
-private:
-	clock_t tiempo;
+protected:
+	clock_t mTiempo;
+	Vector2<float> *mPosicion;
 public:
-	virtual ~Objeto() = default;
-
-	void setTiempo(const clock_t &t) { tiempo = t; }
-	inline clock_t getTiempo() const { return tiempo; }
-
-	virtual Vector2<float> *getPosicion() const = 0;
+	explicit Objeto(Vector2<float> *v): mTiempo(0), mPosicion(v) {}
+	virtual ~Objeto()
+	{
+		delete mPosicion;
+	}
 
 	virtual void tick() = 0;
+
+	/*
+	 * Getters
+	 */
+	void setTiempo(const clock_t &t) { mTiempo = t; }
+	inline clock_t getTiempo() const { return mTiempo; }
+
+	Vector2<float> *getPosicion() const { return mPosicion; }
 };
