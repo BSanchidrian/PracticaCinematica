@@ -36,21 +36,30 @@ int main()
 	Misil *misil = new Misil(velocidadInicialMisil, anguloLanzamieto);
 
 	clock_t tiempoInicio = clock();
-	while(!GetAsyncKeyState(VK_F1))
+	while(!GetAsyncKeyState(VK_ESCAPE))
 	{
 		clock_t tiempo = clock() - tiempoInicio;
 		ClearScreen();
 
+		printf("Esta simulacion es una aproximacion dado que se realiza en saltos de 1 aproximadamente segundo\nPulsa ESCAPE para omitir\n\n");
 		cohete->setTiempo(tiempo);
+		misil->setTiempo(tiempo);
+
 		cohete->tick();
-		//misil->tick();
+		misil->tick();
 
-		printf("COHETE\nPosicion = %.2fm\nTiempo = %dms (%ds)\n", cohete->getPosicion()->getX(), cohete->getTiempo(), cohete->getTiempo() / 1000);
+		printf("Tiempo transcurrido: %ldms (%ds)\n", tiempo, tiempo/1000);
+		printf("COHETE\n");
+		cohete->print();
+		printf("---------------------------------------\n");
+		printf("MISIL\n");
+		misil->print();
 
-		//printf("MISIL\nPosicion = %d m\nTiempo = %d s\n", cohete->getPosicion()->getX(), cohete->getTiempoVuelo());
-
+		if (misil->getPosicion()->getY() == 0 && tiempo != 0) break;
 		Sleep(1000);
 	}
+
+	printf("Hacer algo aqui :D");
 
 	return 0;
 }

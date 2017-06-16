@@ -21,6 +21,14 @@ public:
 
 	virtual void tick() = 0;
 
+	void print() const
+	{
+		printf("Posicion {\n");
+		printf("\tX = %.2fm\n", getPosicion()->getX());
+		printf("\tY = %.2fm\n", getPosicion()->getY());
+		printf("}\n");
+	}
+
 	/*
 	 * Getters
 	 */
