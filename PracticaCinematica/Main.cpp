@@ -13,6 +13,17 @@ void ClearScreen()
 	if (system("CLS")) system("clear");
 }
 
+/*
+ * Hay que añadir un "tiempoLanzamiento" al misil, de forma que:
+ * Cohete	= tiempoAvistamiento
+ * Misil	= tiempoAvistamiento + tiempoLanzamiento
+ * 
+ * De esa forma el instante de tiempo en el que se encuentren será el mismo (al igual que X e Y)
+ * Si el misil se lanza tan pronto se avista el cohete seria tiempoAvistamiento + 0 (Es tal y como esta programado ahora mismo)
+ * 
+ * Igual es buena idea cambiar el metodo getTime a virtual para implementarlo segun convenga en cada clase 
+ */
+
 int main()
 {
 	float alturaCohete, velocidadCohete;
