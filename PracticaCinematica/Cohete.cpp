@@ -10,5 +10,5 @@ void Cohete::tick()
 {
 	// V = cte
 	// X = Xo + Vt
-	mPosicion->setX(0 + mVelocidad * getTiempo()/1000);
+	mPosicion->setX(0 + mVelocidad * getTiempo());
 }

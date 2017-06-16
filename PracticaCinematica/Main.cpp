@@ -13,21 +13,10 @@ void ClearScreen()
 	if (system("CLS")) system("clear");
 }
 
-/*
- * Hay que añadir un "tiempoLanzamiento" al misil, de forma que:
- * Cohete	= tiempoAvistamiento
- * Misil	= tiempoAvistamiento + tiempoLanzamiento
- * 
- * De esa forma el instante de tiempo en el que se encuentren será el mismo (al igual que X e Y)
- * Si el misil se lanza tan pronto se avista el cohete seria tiempoAvistamiento + 0 (Es tal y como esta programado ahora mismo)
- * 
- * Igual es buena idea cambiar el metodo getTime a virtual para implementarlo segun convenga en cada clase 
- */
-
 int main()
 {
 	float alturaCohete, velocidadCohete;
-	float velocidadInicialMisil, anguloLanzamieto;
+	float velocidadInicialMisil, anguloLanzamieto, tiempoLanzamiento;
 
 	cout << "Altura del cohete a interceptar (m) = ";
 	cin >> alturaCohete;
@@ -43,30 +32,34 @@ int main()
 	cout << "Angulo de lanzamiento del misil (grados) = ";
 	cin >> anguloLanzamieto;
 
+	cout << "Instante de lanzamiento (s) (usar 0 si se quiere que el misil sea lanzado tan pronto se vea el cohete) = ";
+	cin >> tiempoLanzamiento;
+
 	Cohete *cohete = new Cohete(alturaCohete, velocidadCohete);
-	Misil *misil = new Misil(velocidadInicialMisil, anguloLanzamieto);
+	Misil *misil = new Misil(velocidadInicialMisil, anguloLanzamieto, tiempoLanzamiento);
 
 	clock_t tiempoInicio = clock();
 	while(!GetAsyncKeyState(VK_ESCAPE))
 	{
-		clock_t tiempo = clock() - tiempoInicio;
+		clock_t tiempoSimulacion = clock() - tiempoInicio;
 		ClearScreen();
 
 		printf("Esta simulacion es una aproximacion dado que se realiza en saltos de 1 aproximadamente segundo\nPulsa ESCAPE para omitir\n\n");
-		cohete->setTiempo(tiempo);
-		misil->setTiempo(tiempo);
+		cohete->setTiempo(tiempoSimulacion);
+		misil->setTiempo(tiempoSimulacion);
 
 		cohete->tick();
 		misil->tick();
 
-		printf("Tiempo transcurrido: %ldms (%ds)\n", tiempo, tiempo/1000);
+		printf("Tiempo transcurrido: %ldms (%ds)\n", tiempoSimulacion, tiempoSimulacion/1000);
 		printf("COHETE\n");
 		cohete->print();
 		printf("---------------------------------------\n");
 		printf("MISIL\n");
 		misil->print();
 
-		if (misil->getPosicion()->getY() == 0 && tiempo != 0) break;
+		// TODO TEMP
+		if (misil->getPosicion()->getX() != 0 && misil->getPosicion()->getY() == 0 && tiempoSimulacion != 0) break;
 		Sleep(1000);
 	}
 

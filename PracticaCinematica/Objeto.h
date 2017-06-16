@@ -33,7 +33,7 @@ public:
 	 * Getters
 	 */
 	void setTiempo(const clock_t &t) { mTiempo = t; }
-	inline clock_t getTiempo() const { return mTiempo; }
+	virtual float getTiempo() const { return mTiempo / static_cast<float>(1000); }
 
 	Vector2<float> *getPosicion() const { return mPosicion; }
 };

@@ -8,9 +8,12 @@ class Misil : public Objeto
 private:
 	float mVelocidadInicial;
 	float mAnguloLanzamiento;
+	float mTiempoLanzamiento;
 public:
-	Misil(const float &velocidad, const float &angulo);
+	Misil(const float &velocidad, const float &angulo, const float &tiempoLanzamiento);
 
+
+	float getTiempo() const override;
 	void tick() override;
 };
 
