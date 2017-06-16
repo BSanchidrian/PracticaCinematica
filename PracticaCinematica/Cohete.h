@@ -8,18 +8,19 @@ class Cohete : public Objeto
 private:
 	float mVelocidad;
 	Vector2<float> *mPosicion;
-	clock_t mTiempoVuelo;
 public:
 	Cohete(const float &altura, const float &velocidad);
-
 	~Cohete();
 
+	/*
+	 * Funcion para la simulacion de este objeto
+	 */
 	void tick() override;
 
+	/*
+	 * Getters
+	 */
 	inline float getVelocidad() const { return mVelocidad; }
-
 	inline Vector2<float> *getPosicion() const override { return mPosicion; }
-
-	inline clock_t getTiempoVuelo() const { return (clock() - mTiempoVuelo)/1000; }
 };
 

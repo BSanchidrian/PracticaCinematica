@@ -16,8 +16,8 @@ public:
 
 	Vector2(const T& x, const T& y) : mX(x), mY(y) {}
 
-	void setX(const T &x) { mX = x; }
-	void setY(const T &y) { mY = y; }
+	void setX(const T &x) const { mX = x; }
+	void setY(const T &y) const { mY = y; }
 
 	inline T getX() const { return mX; }
 	inline T getY() const { return mY; }

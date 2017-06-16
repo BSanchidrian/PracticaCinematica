@@ -34,18 +34,19 @@ int main()
 	cin >> anguloLanzamieto;
 
 	Cohete *cohete = new Cohete(alturaCohete, velocidadCohete);
-	Misil *misil = new Misil(velocidadInicialMisil, anguloLanzamieto);
+	//Misil *misil = new Misil(velocidadInicialMisil, anguloLanzamieto);
 
-	cout << cohete->getTiempoVuelo();
-
+	clock_t tiempoInicio = clock();
 	while(!GetAsyncKeyState(VK_F1))
 	{
+		clock_t tiempo = clock() - tiempoInicio;
 		ClearScreen();
 
+		cohete->setTiempo(tiempo);
 		cohete->tick();
-		misil->tick();
+		//misil->tick();
 
-		printf("COHETE\nPosicion = %.2f m\nTiempo = %d s\n", cohete->getPosicion()->getX(), cohete->getTiempoVuelo());
+		printf("COHETE\nPosicion = %.2fm\nTiempo = %ds (%dms)\n", cohete->getPosicion()->getX(), cohete->getTiempo() / 1000, cohete->getTiempo());
 
 		//printf("MISIL\nPosicion = %d m\nTiempo = %d s\n", cohete->getPosicion()->getX(), cohete->getTiempoVuelo());
 
