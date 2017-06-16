@@ -1,16 +1,20 @@
 #include "Cohete.h"
 
-Cohete::Cohete(int altura, int velocidad)
+Cohete::Cohete(const float &altura, const float &velocidad)
 {
-	mAltura = altura;
 	mVelocidad = velocidad;
-	mPosicion = 0;	//Supongo que el cohete empieza en la posición x = 0
+	mPosicion = new Vector2<float>(0, altura);	//Supongo que el cohete empieza en la posición x = 0
 	mTiempoVuelo = clock();
+}
+
+Cohete::~Cohete()
+{
+	delete mPosicion;
 }
 
 void Cohete::tick()
 {
 	// V = cte
 	// X = Xo + Vt
-	mPosicion = 0 + mVelocidad * getTiempoVuelo();
+	mPosicion->setX(0 + mVelocidad * getTiempoVuelo());
 }

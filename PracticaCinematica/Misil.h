@@ -1,15 +1,19 @@
 #pragma once
 #include <ctime>
 #include "Objeto.h"
+#include "Vector2.h"
 
 class Misil : public Objeto
 {
 private:
-	int mVelocidadInicial;
-	int mAnguloLanzamiento;
+	float mVelocidadInicial;
+	float mAnguloLanzamiento;
 	clock_t mTiempoVuelo;
+	Vector2<float> *mPosicion;
 public:
-	Misil(const int &velocidad, const int &angulo);
+	Misil(const float &velocidad, const float &angulo);
+
+	~Misil();
 
 	void tick() override;
 

@@ -143,7 +143,6 @@
     <ClCompile Include="Dibujar.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Misil.cpp" />
-    <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cohete.h" />

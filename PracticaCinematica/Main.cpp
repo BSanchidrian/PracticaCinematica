@@ -16,8 +16,8 @@ void ClearScreen()
 
 int main()
 {
-	int alturaCohete, velocidadCohete;
-	int velocidadInicialMisil, anguloLanzamieto;
+	float alturaCohete, velocidadCohete;
+	float velocidadInicialMisil, anguloLanzamieto;
 
 	cout << "Altura del cohete a interceptar (m) = ";
 	cin >> alturaCohete;
@@ -45,9 +45,9 @@ int main()
 		cohete->tick();
 		misil->tick();
 
-		printf("COHETE\nPosicion = %d m\nTiempo = %d s\n", cohete->getPosicion(), cohete->getTiempoVuelo());
+		printf("COHETE\nPosicion = %.2f m\nTiempo = %d s\n", cohete->getPosicion()->getX(), cohete->getTiempoVuelo());
 
-		printf("MISIL\nPosicion = %d m\nTiempo = %d s\n", cohete->getPosicion(), cohete->getTiempoVuelo());
+		//printf("MISIL\nPosicion = %d m\nTiempo = %d s\n", cohete->getPosicion()->getX(), cohete->getTiempoVuelo());
 
 		Sleep(1000);
 	}
