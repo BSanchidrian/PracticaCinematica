@@ -59,11 +59,12 @@ int main()
 		misil->print();
 
 		// TODO TEMP
-		if (misil->getPosicion()->getX() != 0 && misil->getPosicion()->getY() == 0 && tiempoSimulacion != 0) break;
+		//if (misil->getPosicion()->getX() != 0 && misil->getPosicion()->getY() == 0 && tiempoSimulacion != 0) break;
 		Sleep(1000);
 	}
+	printf("Hacer algo aqui :D\n");
 
-	printf("Hacer algo aqui :D");
+	printf("Colisiona = %d\n", misil->colisiona(*cohete));
 
 	return 0;
 }
