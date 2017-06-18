@@ -53,6 +53,7 @@ int main()
 		ClearScreen();
 
 		printf("Esta simulacion es una aproximacion dado que se realiza en saltos de 1 aproximadamente segundo\nPulsa ESCAPE para omitir\n\n");
+		printf("MARGEN DE ERROR ~1m\n");
 		cohete->setTiempo(tiempoSimulacion);
 		misil->setTiempo(tiempoSimulacion);
 
@@ -92,27 +93,27 @@ bool colisiona(const Cohete &cohete, const Misil &misil, long &tiempoColision)
 	printf("TIEMPO DE COLISION = %f\n", tiempoColision2);
 
 	// 2º Comprobar que las X son iguales
-	int xCohete = cohete.getVelocidad() * tiempoColision1;
-	int xMisil = Vx * (tiempoColision1 - misil.getTiempoLanzamiento());
+	int xCohete = static_cast<int>(cohete.getVelocidad() * tiempoColision1);
+	int xMisil = static_cast<int>(Vx * (tiempoColision1 - misil.getTiempoLanzamiento()));
 
 	printf("Xc = %d\nXm = %d\n", xCohete, xMisil);
 	// Supongamos un margen de error de 1 metro..
 	if (abs(xCohete - xMisil) <= 1)
 	{
-		tiempoColision = tiempoColision1 * 1000;
+		tiempoColision = static_cast<long>(tiempoColision1 * 1000);
 		return true;
 	}
 
 	printf("Tiempo de lanzamiento = %.2f\n", misil.getTiempoLanzamiento() + (xMisil - xCohete) / cohete.getVelocidad());
 
 	// Puede ser que el impacto se realice cuando el misil cae
-	xCohete = cohete.getVelocidad() * tiempoColision2;
-	xMisil = Vx * (tiempoColision2 - misil.getTiempoLanzamiento());
+	xCohete = static_cast<int>(cohete.getVelocidad() * tiempoColision2);
+	xMisil = static_cast<int>(Vx * (tiempoColision2 - misil.getTiempoLanzamiento()));
 	printf("Xc = %d\nXm = %d\n", xCohete, xMisil);
 
 	if (abs(xCohete - xMisil) <= 1)
 	{
-		tiempoColision = tiempoColision2 * 1000;
+		tiempoColision = static_cast<long>(tiempoColision2 * 1000);
 		return true;
 	}
 
