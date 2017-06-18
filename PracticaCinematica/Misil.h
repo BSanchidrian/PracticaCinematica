@@ -13,10 +13,12 @@ private:
 public:
 	Misil(const float &velocidad, const float &angulo, const float &tiempoLanzamiento);
 
-	bool colisiona(const Cohete &cohete) const;
-
 	void tick() override;
 
 	float getTiempo() const override;
+
+	inline float getVelocidadInicial() const { return mVelocidadInicial; }
+	inline float getAngulo() const { return mAnguloLanzamiento; }
+	inline float getTiempoLanzamiento() const { return mTiempoLanzamiento; }
 };
 

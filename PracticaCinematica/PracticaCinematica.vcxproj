@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cohete.h" />
+    <ClInclude Include="Constantes.h" />
     <ClInclude Include="Objeto.h" />
     <ClInclude Include="Misil.h" />
     <ClInclude Include="Vector2.h" />
