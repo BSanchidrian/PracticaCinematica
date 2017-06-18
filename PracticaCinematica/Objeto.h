@@ -36,6 +36,4 @@ public:
 	virtual float getTiempo() const { return mTiempo / static_cast<float>(1000); }
 
 	Vector2<float> *getPosicion() const { return mPosicion; }
-
-	friend int test(int a, int b) { return a + b; };
 };

@@ -37,6 +37,8 @@ int main()
 
 	Cohete *cohete = new Cohete(alturaCohete, velocidadCohete);
 	Misil *misil = new Misil(velocidadInicialMisil, anguloLanzamieto, tiempoLanzamiento);
+	printf("Colisiona = %d\n", misil->colisiona(*cohete));
+	system("pause");
 
 	clock_t tiempoInicio = clock();
 	while(!GetAsyncKeyState(VK_ESCAPE))
@@ -64,7 +66,6 @@ int main()
 	}
 	printf("Hacer algo aqui :D\n");
 
-	printf("Colisiona = %d\n", misil->colisiona(*cohete));
 
 	return 0;
 }
