@@ -9,7 +9,7 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-bool colisiona(const Cohete &cohete, const Misil &misil);
+bool colisiona(const Cohete &cohete, const Misil &misil, long &tiempoColision);
 
 void ClearScreen()
 {
@@ -40,13 +40,16 @@ int main()
 
 	Cohete *cohete = new Cohete(alturaCohete, velocidadCohete);
 	Misil *misil = new Misil(velocidadInicialMisil, anguloLanzamieto, tiempoLanzamiento);
-	printf("Colisiona = %d\n", colisiona(*cohete, *misil));
+	
+	long tiempoColision = 0;
+	printf("Colisiona = %d\n", colisiona(*cohete, *misil, tiempoColision));
 	system("pause");
 
-	clock_t tiempoInicio = clock();
-	while(!GetAsyncKeyState(VK_ESCAPE))
+	clock_t tiempoInicio = clock(), tiempoSimulacion = -1;
+	while(!GetAsyncKeyState(VK_ESCAPE) && tiempoSimulacion != tiempoColision)
 	{
-		clock_t tiempoSimulacion = clock() - tiempoInicio;
+		tiempoSimulacion = clock() - tiempoInicio;
+		if (tiempoSimulacion > tiempoColision && tiempoColision != 0) tiempoSimulacion = tiempoColision;
 		ClearScreen();
 
 		printf("Esta simulacion es una aproximacion dado que se realiza en saltos de 1 aproximadamente segundo\nPulsa ESCAPE para omitir\n\n");
@@ -74,7 +77,7 @@ int main()
 	return 0;
 }
 
-bool colisiona(const Cohete &cohete, const Misil &misil)
+bool colisiona(const Cohete &cohete, const Misil &misil, long &tiempoColision)
 {
 	// TODO añadir la opcion del rozamiento..
 	auto Vx = misil.getVelocidadInicial() * cos(misil.getAngulo() * constantes::PI / 180);
@@ -94,14 +97,24 @@ bool colisiona(const Cohete &cohete, const Misil &misil)
 
 	printf("Xc = %d\nXm = %d\n", xCohete, xMisil);
 	// Supongamos un margen de error de 1 metro..
-	if (abs(xCohete - xMisil) <= 1) return true;
+	if (abs(xCohete - xMisil) <= 1)
+	{
+		tiempoColision = tiempoColision1 * 1000;
+		return true;
+	}
+
+	printf("Tiempo de lanzamiento = %.2f\n", misil.getTiempoLanzamiento() + (xMisil - xCohete) / cohete.getVelocidad());
 
 	// Puede ser que el impacto se realice cuando el misil cae
 	xCohete = cohete.getVelocidad() * tiempoColision2;
 	xMisil = Vx * (tiempoColision2 - misil.getTiempoLanzamiento());
 	printf("Xc = %d\nXm = %d\n", xCohete, xMisil);
 
-	if (abs(xCohete - xMisil) <= 1) return true;
+	if (abs(xCohete - xMisil) <= 1)
+	{
+		tiempoColision = tiempoColision2 * 1000;
+		return true;
+	}
 
 	// Se supone que no colisiona
 	return false;
